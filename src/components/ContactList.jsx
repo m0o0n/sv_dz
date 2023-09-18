@@ -16,6 +16,7 @@ const ContactList = ({ contacts }) => {
                 } else if (!value.trim()) {
                     return contacts
                 }
+                return false
             })
         )
     }
