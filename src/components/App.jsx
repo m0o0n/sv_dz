@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { Component, useState } from "react";
 import Form from "./Form";
 
 
@@ -21,7 +21,7 @@ const STATE = {
 export class App extends Component {
   state = STATE
   addContact(arg) {
-    this.setState((state) => { return { contacts: [arg, ...state.contacts] } })
+    this.setState((state) => { return { contacts: [arg, ...state.contacts], filtered: [arg, ...state.contacts]} })
   }
   dropContact(id) {
     this.setState((state) => { return { contacts: state.contacts.filter((el) => el.id !== id) } })
