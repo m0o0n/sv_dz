@@ -21,7 +21,7 @@ const STATE = {
 export class App extends Component {
   state = STATE
   addContact(arg) {
-    this.setState((state) => { return { contacts: [arg, ...state.contacts], filtered: [arg, ...state.contacts]} })
+    this.setState((state) => { return { contacts: [arg, ...state.contacts], filtered: [arg, ...state.contacts] } })
   }
   dropContact(id) {
     this.setState((state) => { return { contacts: state.contacts.filter((el) => el.id !== id) } })
@@ -30,16 +30,23 @@ export class App extends Component {
   handleOnDrop = (id) => {
     this.dropContact(id)
   }
+  setContacts(value) {
+    const filtred = (contacts) => {
+      return contacts.filter((el) => {
+        if (el.name.toLowerCase().includes(value) || el.number.toLowerCase().includes(value)) {
+          return el
+        }
+      })
+    }
+    this.setState({
+      contacts: filtred(this.state.filtered)
+
+    })
+  }
 
   handleOnChange({ target: { value } }) {
     if (value) {
-      this.setState({
-        contacts: this.state.contacts.filter((el) => {
-          if (el.name.toLowerCase().includes(value) || el.number.toLowerCase().includes(value)) {
-            return el
-          }
-        })
-      })
+      this.setContacts(value)
     } else {
       this.setState({ contacts: this.state.filtered })
     }
